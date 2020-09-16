@@ -48,6 +48,7 @@ public slots:
 
 };
 
-
+//тест гитхаба
+int a;
 
 #endif // ASYNCHRON_MASHINE_H
