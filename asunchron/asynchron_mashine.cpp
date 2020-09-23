@@ -1,23 +1,22 @@
-#include "asynchron_mashine.h"
+﻿#include "asynchron_mashine.h"
 #include "math_convert.h"
 
  void asynchronous_motor::model_AM(float Ua, float Ub, float Uc, float M){
 
-     float Ualfa=0, Ubetta=0, Tetta=0, dTetta=0;
-     float U1d=0, U1q=0;
-     float f=0, omega= 0;
-     float dt=0.0001; //шаг расчёта, надо подумать, как граммотно его использовать в модуляции
-     float di1d=0,di1q=0;
-     float i1d=0,i1q=0;
-     float psi2d=0, dpsi2d=0;
-     float dif=0, ym1=0, summ1=0;//верхний сумматор
-     float summ2=0, ym2=0, ym3=0;//нижний сумматор
-     float   ym4=0, del1=0, mitog=0, m=0, mc=0, ym5=0, w2=0, w=0, w1=0, omega_itog=0, ym6=0, domega_itog=0;
+     static float Ualfa=0, Ubetta=0, Tetta=0;
+     static float U1d=0, U1q=0;
+     static float dt=0.0001; //шаг расчёта, надо подумать, как граммотно его использовать в модуляции
+     static float di1d=0,di1q=0;
+     static float i1d=0,i1q=0;
+     static float psi2d=0, dpsi2d=0;
+     static float dif=0, ym1=0, summ1=0;//верхний сумматор
+     static float summ2=0, ym2=0, ym3=0;//нижний сумматор
+     static float ym4=0, mitog=0, m=0, mc=0, ym5=0, w2=0, w=0, w1=0, omega_itog=0, ym6=0;
      float summ11=0,summ21=0, i11d=0, ym5_new=0, ym5_old=0, dym5=0, alfa_buf=0, betta_buf=0 ,
-     abuf=0, bbuf=0, cbuf=0,sk_vrash, sum_x1=0, sum_x2=0, sum_x3=0;
+     abuf=0, bbuf=0, cbuf=0,sk_vrash;
      mc=M;
      /////////////////////////////////////////////Переменные для векторного управления
-     float  Tetta_reg=0, id_reg=0, iq_reg=0;
+     static float  Tetta_reg=0, id_reg=0, iq_reg=0;
      //////////////////////////////АД модель тау уравнения////////////////////////////////////////////////////////////
               ABC_dq(Ua, Ub, Uc, &U1d, &U1q, Tetta);
 
@@ -62,7 +61,4 @@
             ABC_dq(Ia , Ib, Ic, &id_reg, &iq_reg,  Tetta_reg);
             sk_vrash=omega_itog;  //скорость вращения ротора рад/сек
      ////////////////////////////////Выходные параметры АД//////////////////////////////////////////
-
-
-
  }

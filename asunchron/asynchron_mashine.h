@@ -1,10 +1,11 @@
-#ifndef ASYNCHRON_MASHINE_H
+﻿#ifndef ASYNCHRON_MASHINE_H
 #define ASYNCHRON_MASHINE_H
 #include <QMainWindow>
 /*
  * Заголовочный файл в котором описан клас асинхронного двигателя и методы,
  * которые описывают математику работы машины.
  */
+
 
 class asynchronous_motor : public QObject
 {
@@ -26,7 +27,7 @@ public:
     float Ia;            //токи статора А
     float Ib;            //             В
     float Ic;            //             С
-    float sk_vrash;      //скорость вращения ротора рад/сек
+    double sk_vrash;      //скорость вращения ротора рад/сек
 private:
     float L1; //индуктивность статорной обмотки
     float L2; //индуктивность роторной обмотки
@@ -47,8 +48,5 @@ public slots:
     void model_AM(float Ua, float Ub, float Uc, float M);
 
 };
-
-//тест гитхаба
-int a;
 
 #endif // ASYNCHRON_MASHINE_H
