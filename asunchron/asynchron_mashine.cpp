@@ -1,7 +1,27 @@
 ﻿#include "asynchron_mashine.h"
 #include "math_convert.h"
 
- void asynchronous_motor::model_AM(float Ua, float Ub, float Uc, float M){
+asynchronous_motor::asynchronous_motor(float Ls, float Lr, float Lm_, float Rs, float Rr, float P, float J_, int F)
+{
+
+            L1=Ls;
+            L2=Lr;
+            Lm=Lm_;
+            r1=Rs;
+            r2=Rr;
+            zp=P;
+            J=J_;
+            f=F;
+            T2=(L2+Lm)*r1;
+             k1=Lm/(L1+Lm);
+             k2=Lm/(L2+Lm);
+             L_1=(L1+Lm)*(1-k1*k2);
+            T_1=L_1/r1;
+            omega= f * 3.14*2;
+
+}
+
+void asynchronous_motor::model_AM(float Ua, float Ub, float Uc, float M){
 
      static float Ualfa=0, Ubetta=0, Tetta=0;
      static float U1d=0, U1q=0;
@@ -13,7 +33,7 @@
      static float summ2=0, ym2=0, ym3=0;//нижний сумматор
      static float ym4=0, mitog=0, m=0, mc=0, ym5=0, w2=0, w=0, w1=0, omega_itog=0, ym6=0;
      float summ11=0,summ21=0, i11d=0, ym5_new=0, ym5_old=0, dym5=0, alfa_buf=0, betta_buf=0 ,
-     abuf=0, bbuf=0, cbuf=0,sk_vrash;
+     abuf=0, bbuf=0, cbuf=0;
      mc=M;
      /////////////////////////////////////////////Переменные для векторного управления
      static float  Tetta_reg=0, id_reg=0, iq_reg=0;

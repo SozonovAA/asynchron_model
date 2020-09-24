@@ -12,17 +12,8 @@ class asynchronous_motor : public QObject
     Q_OBJECT
 
 public:
-    explicit asynchronous_motor(float Ls, float Lr, float Lm_,
-                                float Rs, float Rr, float P, float J_, int F){
-        L1=Ls;
-        L2=Lr;
-        Lm=Lm_;
-        r1=Rs;
-        r2=Rr;
-        zp=P;
-        J=J_;
-        f=F;
-    }
+    asynchronous_motor(float Ls, float Lr, float Lm_,
+                                float Rs, float Rr, float P, float J_, int F);
     //выходные параметры двигателя:
     float Ia;            //токи статора А
     float Ib;            //             В
@@ -37,12 +28,12 @@ private:
     float zp; //количество полюсов электродвигателя
     float J;  //инерция двигателя
     int f; //частота питающей сети
-    float T2=(L2+Lm)*r1;
-    float k1=Lm/(L1+Lm);
-    float k2=Lm/(L2+Lm);
-    float L_1=(L1+Lm)*(1-k1*k2);
-    float T_1=L_1/r1;
-    float omega= f * 3.14*2;
+    float T2;
+    float k1;
+    float k2;
+    float L_1;
+    float T_1;
+    float omega;
 
 public slots:
     void model_AM(float Ua, float Ub, float Uc, float M);
